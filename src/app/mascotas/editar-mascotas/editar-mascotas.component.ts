@@ -74,4 +74,9 @@ export class EditarMascotasComponent implements OnInit {
       });
     }
   }
+
+  // Nueva función goHome
+  goHome() {
+    this.router.navigate(['/']);  // Redirigir a la página de inicio
+  }
 }

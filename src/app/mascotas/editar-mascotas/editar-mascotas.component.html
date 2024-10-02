@@ -76,15 +76,20 @@
   </select>
 </fieldset>
 
-<!-- Botón Enviar -->
-<div class="text-center">
+<div class="d-flex justify-content-between text-center">
+  <!-- Botón Enviar -->
   <button type="submit" class="btn btn-custom" [disabled]="!mascotaForm.form.valid">Enviar</button>
+  <!-- Botón Volver a Inicio -->
+  <button type="button" class="btn btn-inicio" (click)="goHome()">
+    Volver a Inicio
+  </button>
 </div>
 </form>
 </div>
 </div>
 
 
+<!-- Estilos personalizados -->
 <!-- Estilos personalizados -->
 <style>
   body {
@@ -122,11 +127,27 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
-    width: 100%; /* Ocupa todo el ancho del formulario */
+    width: 48%; /* Ocupa casi la mitad del contenedor */
   }
 
   .btn-custom:hover {
     background-color: #68b191;
+  }
+
+  .btn-inicio {
+    background-color: #b1b1b1; 
+    border: none;
+    color: white;
+    margin-top: 10px;
+    padding: 12px 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    width: 48%; /* Ocupa casi la mitad del contenedor */
+  }
+
+  .btn-inicio:hover {
+    background-color: #e53935; /* Un tono más oscuro al pasar el ratón */
   }
 
   .icon-selection {
@@ -140,18 +161,6 @@
     text-align: center;
     flex: 1 1 150px; /* Tamaño flexible para iconos */
     margin: 10px;
-  }
-
-  .animal-icon {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-  }
-
-  .icon-box p {
-    margin-top: 5px;
-    font-size: 14px;
-    color: #333;
   }
 
   .icon-selection .icon-box {
@@ -169,20 +178,19 @@
     background-color: #e7f1ff;
     border-radius: 10px;
   }
-
   .animal-icon {
-    width: 50px;
-    height: 50px;
-  }
-
-  .icon-box p {
-    margin-top: 5px;
-    font-size: 14px;
-  }
+  width: 24px; /* Ajusta este valor según el tamaño original que desees */
+  height: 24px; /* Ajusta este valor según el tamaño original que desees */
+}
 
   @media (max-width: 768px) {
     form {
       padding: 20px; /* Menos padding en pantallas pequeñas */
+    }
+
+    .btn-custom, .btn-inicio {
+      width: 100%; /* Botones ocuparán el ancho completo en pantallas pequeñas */
+      margin-bottom: 10px; /* Espacio entre los botones en pantallas pequeñas */
     }
   }
 </style>
