@@ -36,3 +36,6 @@ export class MascotaService {
     return this.http.delete<string>(`${this.BASE_URL}/mascotas/eliminar/${idMascota}`);
   }
 }
+
+
+

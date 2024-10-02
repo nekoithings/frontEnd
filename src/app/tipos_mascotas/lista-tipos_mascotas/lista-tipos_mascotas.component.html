@@ -1,0 +1,75 @@
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-12 col-md-10">
+        <div class="content-box p-4">
+          <h2 class="text-center mb-4">TIPOS DE MASCOTAS</h2>
+          <div class="row">
+            <div *ngFor="let tipo of tiposMascotas | async" class="col-sm-12 col-md-6 col-lg-4">
+              <div class="card mb-4 shadow-sm">
+                <div class="card-body text-center">
+                  <h5 class="card-title">{{ tipo.nombre_tipo }}</h5>
+                  <p class="card-text">
+                    <strong>ID:</strong> {{ tipo.id }}
+                  </p>
+                  <div class="d-flex justify-content-center">
+                    <a class="btn btn-info mx-2" [routerLink]="['/tipos-mascotas/editar', tipo.id]">Editar</a>
+                    <a class="btn btn-danger mx-2" (click)="borrarTipoMascota(tipo.id)">Borrar</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-center">
+            <a class="btn btn-primary btn-lg mt-4 mx-2" [routerLink]="['/tipos-mascotas/agregar']">
+              Nuevo Tipo
+            </a>
+            <a class="btn btn-secondary btn-lg mt-4 mx-2" [routerLink]="['/']">
+              Inicio
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <style>
+    .content-box {
+      background-color: #ececec; 
+      border-radius: 15px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  
+    h2 {
+      color: #17b3b8;
+      font-weight: bold;
+      margin-top: 40px; 
+      margin-bottom: 30px; 
+    }
+  
+    .card {
+      border-radius: 15px;
+      transition: all 0.3s ease;
+    }
+  
+    .card:hover {
+      transform: scale(1.05);
+    }
+  
+    .card-title {
+      color: #17b3b8;
+      font-weight: bold;
+    }
+  
+    .btn-info {
+      background-color: #17b3b8;
+      border-color: #17a2b8;
+      color: white; 
+    }
+  
+    .btn-danger {
+      background-color: #dc3545;
+      border-color: #dc3545;
+      color: white; 
+    }
+  </style>
+  

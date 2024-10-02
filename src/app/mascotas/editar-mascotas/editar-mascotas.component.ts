@@ -40,7 +40,11 @@ export class EditarMascotasComponent implements OnInit {
       console.log('La solicitud viene de Nueva Mascota');
     }
   }
+  selectedIcon: string = '';
 
+  selectIcon(icon: string) {
+    this.selectedIcon = icon;
+  }
   onSubmit() {
     console.log("On Submit");
   

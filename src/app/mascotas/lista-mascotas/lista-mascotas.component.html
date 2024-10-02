@@ -1,41 +1,99 @@
 <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <form class="form-inline">
-          <fieldset class="form-group col-sm-11"></fieldset>
-          <fieldset class="form-group col-sm-1">
-            <a class="btn btn-primary" [routerLink]="['/mascotas/agregar']">Nueva Mascota</a>
-          </fieldset>
-        </form>
-        <br>
-        <table class="table table-striped">
-          <thead>
-            <tr class="row">
-              <th class="col-sm-1">ID</th>
-              <th class="col-sm-2">Nombre</th>
-              <th class="col-sm-1">Edad</th>
-              <th class="col-sm-2">Raza</th>
-              <th class="col-sm-1">Género</th>
-              <th class="col-sm-1">Estado</th>
-              <th class="col-sm-2">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let mascota of mascotas | async" class="row">
-              <td class="col-sm-1"><i>{{ mascota.id }}</i></td>
-              <td class="col-sm-2"><i>{{ mascota.nombre }}</i></td>
-              <td class="col-sm-1"><i>{{ mascota.edad }}</i></td>
-              <td class="col-sm-2"><i>{{ mascota.raza }}</i></td>
-              <td class="col-sm-1"><i>{{ mascota.genero }}</i></td>
-              <td class="col-sm-1"><i>{{ mascota.estado }}</i></td>
-              <td class="col-sm-2">
-                <a class="btn btn-info" [routerLink]="['/mascotas/editar', mascota.id]">Editar</a>
-                <a class="btn btn-danger" (click)="borrarMascota(mascota.id)">Borrar</a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+  <div class="row justify-content-center">
+    <div class="col-sm-12 col-md-10">
+      <div class="content-box p-4">
+        <h2 class="text-center mb-4">MASCOTAS DE LA EMPRESA</h2>
+        <div class="row">
+          <div *ngFor="let mascota of mascotas | async" class="col-sm-12 col-md-6 col-lg-4">
+            <div class="card mb-4 shadow-sm">
+              <div class="card-body text-center"> <!-- Centrar contenido -->
+                <h5 class="card-title">{{ mascota.nombre }}</h5>
+                <p class="card-text">
+                  <strong>ID:</strong> {{ mascota.id }} <br>
+                  <strong>Edad:</strong> {{ mascota.edad }} <br>
+                  <strong>Raza:</strong> {{ mascota.raza }} <br>
+                  <strong>Género:</strong> {{ mascota.genero }} <br>
+                  <strong>Estado:</strong> {{ mascota.estado }}
+                </p>
+                <div class="d-flex justify-content-center"> <!-- Centrar botones -->
+                  <a class="btn btn-info mx-2" [routerLink]="['/mascotas/editar', mascota.id]">Editar</a>
+                  <a class="btn btn-danger mx-2" (click)="borrarMascota(mascota.id)">Borrar</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Botones "Nueva Mascota" y "Inicio" al final -->
+        <div class="text-center">
+          <a class="btn btn-primary btn-lg mt-4 mx-2" [routerLink]="['/mascotas/agregar']" style="background-color: #007bff; border-color: #007bff;">
+            Nueva Mascota
+          </a>
+          <a class="btn btn-secondary btn-lg mt-4 mx-2" [routerLink]="['/']" style="background-color: #6c757d; border-color: #6c757d;">
+            Inicio
+          </a>
+        </div>
       </div>
     </div>
   </div>
-  
+</div>
+
+<!-- Estilos embebidos -->
+<style>
+  /* Caja contenedora con fondo claro */
+  .content-box {
+    background-color: #ececec; 
+    border-radius: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Título principal */
+  h2 {
+    color: #17b3b8;
+    font-weight: bold;
+    margin-top: 40px; /* Espaciado superior adicional */
+    margin-bottom: 30px; /* Espaciado inferior */
+  }
+
+  .card {
+    border-radius: 15px;
+    transition: all 0.3s ease;
+  }
+
+  .card:hover {
+    transform: scale(1.05);
+  }
+
+  .card-title {
+    color: #17b3b8;
+    font-weight: bold;
+  }
+
+  .card-text {
+    font-size: 14px;
+  }
+
+  .btn-info {
+    background-color: #17b3b8;
+    border-color: #17a2b8;
+    color: white; 
+  }
+
+  .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: white; 
+  }
+
+  /* Responsivo */
+  @media (max-width: 767.98px) {
+    .card {
+      margin-bottom: 1rem;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 991.98px) {
+    .col-md-6 {
+      margin-bottom: 1rem;
+    }
+  }
+</style>
