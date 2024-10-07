@@ -10,6 +10,7 @@ import { SolicitudAdopcionService } from '../shared/solicitudes.service';
 })
 export class SolicitudAdopcionListaComponent implements OnInit {
   solicitudes: Observable<SolicitudAdopcionModel[]> | undefined;
+  idSolicitud: string = ''; // Variable para almacenar el ID de la solicitud a buscar
 
   constructor(private solicitudService: SolicitudAdopcionService) {}
 
@@ -17,6 +18,7 @@ export class SolicitudAdopcionListaComponent implements OnInit {
     this.solicitudes = this.solicitudService.obtenerSolicitudes();
   }
 
+  // Método para borrar una solicitud de adopción
   borrarSolicitud(idSolicitud: string | null) {
     console.log(`ID de la solicitud a borrar: ${idSolicitud}`);
 
@@ -30,6 +32,27 @@ export class SolicitudAdopcionListaComponent implements OnInit {
           console.log(`Error al eliminar la solicitud: ${err}`);
         }
       });
+    }
+  }
+
+  // Método para buscar una solicitud por ID
+  obtenerSolicitud(idSolicitud: string) {
+    if (idSolicitud.trim()) {
+      this.solicitudService.obtenerSolicitud(idSolicitud).subscribe({
+        next: (solicitud) => {
+          this.solicitudes = new Observable<SolicitudAdopcionModel[]>(observer => {
+            observer.next([solicitud]);
+            observer.complete();
+          });
+        },
+        error: (err) => {
+          console.log(`Error al obtener la solicitud: ${err}`);
+          alert("No se encontró la solicitud con el ID proporcionado");
+        }
+      });
+    } else {
+      // Si el campo de búsqueda está vacío, recarga todas las solicitudes
+      this.ngOnInit();
     }
   }
 }

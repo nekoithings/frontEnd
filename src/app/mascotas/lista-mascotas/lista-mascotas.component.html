@@ -1,99 +1,151 @@
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-sm-12 col-md-10">
-      <div class="content-box p-4">
-        <h2 class="text-center mb-4">MASCOTAS DE LA EMPRESA</h2>
-        <div class="row">
-          <div *ngFor="let mascota of mascotas | async" class="col-sm-12 col-md-6 col-lg-4">
-            <div class="card mb-4 shadow-sm">
-              <div class="card-body text-center"> <!-- Centrar contenido -->
-                <h5 class="card-title">{{ mascota.nombre }}</h5>
-                <p class="card-text">
-                  <strong>ID:</strong> {{ mascota.id }} <br>
-                  <strong>Edad:</strong> {{ mascota.edad }} <br>
-                  <strong>Raza:</strong> {{ mascota.raza }} <br>
-                  <strong>Género:</strong> {{ mascota.genero }} <br>
-                  <strong>Estado:</strong> {{ mascota.estado }}
-                </p>
-                <div class="d-flex justify-content-center"> <!-- Centrar botones -->
-                  <a class="btn btn-info mx-2" [routerLink]="['/mascotas/editar', mascota.id]">Editar</a>
-                  <a class="btn btn-danger mx-2" (click)="borrarMascota(mascota.id)">Borrar</a>
-                </div>
-              </div>
-            </div>
-          </div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Mascotas</title>
+    <style>
+        body {
+            background-color: #f9c74f; /* Fondo amarillo */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .content-box {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        h2 {
+            color: #855121;
+            font-weight: bold;
+            margin-top: 40px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        p.subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .search-box {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .search-box input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px 0 0 5px;
+            width: 70%;
+            max-width: 300px;
+        }
+
+        .search-box button {
+            padding: 10px 15px;
+            border: none;
+            background-color: #f1a93e;
+            color: white;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+
+        .card {
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            background-color: #ececec;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card-title {
+            color: #855121;
+            font-weight: bold;
+        }
+
+        .card-text {
+            font-size: 14px;
+        }
+
+        .btn-info {
+            background-color: #f1a93e; /* Color de fondo del botón info */
+            border: none;
+            color: white; 
+        }
+
+        .btn-danger {
+            background-color: #d9534f; /* Color de fondo del botón de eliminar */
+            color: white; 
+        }
+
+        .btn-primary {
+            background-color: #f1c40f; /* Color de fondo del botón primario */
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: #8e735b; /* Color de fondo del botón secundario */
+            color: white;
+        }
+
+        @media (max-width: 767.98px) {
+            .card {
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content-box">
+        <h2>MASCOTAS DE LA EMPRESA</h2>
+        <p class="subtitle">Aquí podrás visualizar y gestionar las mascotas registradas en la empresa.</p>
+        
+        <!-- Barra de búsqueda -->
+        <div class="search-box">
+            <input type="text" placeholder="Buscar mascota por ID..." [(ngModel)]="idBuscar">
+            <button (click)="buscarMascota()">Buscar</button>
         </div>
+
+        <!-- Listado de mascotas -->
+        <div class="row">
+            <div *ngFor="let mascota of mascotas | async" class="col-sm-12 col-md-6 col-lg-4">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ mascota.nombre }}</h5>
+                        <p class="card-text">
+                            <strong>ID:</strong> {{ mascota.id }} <br>
+                            <strong>Edad:</strong> {{ mascota.edad }} <br>
+                            <strong>Raza:</strong> {{ mascota.raza }} <br>
+                            <strong>Género:</strong> {{ mascota.genero }} <br>
+                            <strong>Estado:</strong> {{ mascota.estado }}
+                        </p>
+                        <div class="d-flex justify-content-center"> 
+                            <a class="btn btn-info mx-2" [routerLink]="['/mascotas/editar', mascota.id]">Editar</a>
+                            <a class="btn btn-danger mx-2" (click)="borrarMascota(mascota.id)">Borrar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Botones "Nueva Mascota" y "Inicio" al final -->
         <div class="text-center">
-          <a class="btn btn-primary btn-lg mt-4 mx-2" [routerLink]="['/mascotas/agregar']" style="background-color: #007bff; border-color: #007bff;">
-            Nueva Mascota
-          </a>
-          <a class="btn btn-secondary btn-lg mt-4 mx-2" [routerLink]="['/']" style="background-color: #6c757d; border-color: #6c757d;">
-            Inicio
-          </a>
+            <a class="btn btn-primary btn-lg mt-4 mx-2" [routerLink]="['/mascotas/agregar']">Nueva Mascota</a>
+            <a class="btn btn-secondary btn-lg mt-4 mx-2" [routerLink]="['/']">Inicio</a>
         </div>
-      </div>
     </div>
-  </div>
-</div>
-
-<!-- Estilos embebidos -->
-<style>
-  /* Caja contenedora con fondo claro */
-  .content-box {
-    background-color: #ececec; 
-    border-radius: 15px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  /* Título principal */
-  h2 {
-    color: #17b3b8;
-    font-weight: bold;
-    margin-top: 40px; /* Espaciado superior adicional */
-    margin-bottom: 30px; /* Espaciado inferior */
-  }
-
-  .card {
-    border-radius: 15px;
-    transition: all 0.3s ease;
-  }
-
-  .card:hover {
-    transform: scale(1.05);
-  }
-
-  .card-title {
-    color: #17b3b8;
-    font-weight: bold;
-  }
-
-  .card-text {
-    font-size: 14px;
-  }
-
-  .btn-info {
-    background-color: #17b3b8;
-    border-color: #17a2b8;
-    color: white; 
-  }
-
-  .btn-danger {
-    background-color: #dc3545;
-    border-color: #dc3545;
-    color: white; 
-  }
-
-  /* Responsivo */
-  @media (max-width: 767.98px) {
-    .card {
-      margin-bottom: 1rem;
-    }
-  }
-
-  @media (min-width: 768px) and (max-width: 991.98px) {
-    .col-md-6 {
-      margin-bottom: 1rem;
-    }
-  }
-</style>
+</body>
+</html>

@@ -10,11 +10,24 @@ import { UsuarioService } from '../shared/usuarios.service';
 })
 export class ListaUsuariosComponent implements OnInit {
   usuarios: Observable<UsuarioModel[]> | undefined;
+  idBuscar: string = '';
 
   constructor(private usuarioService: UsuarioService) {}
 
   ngOnInit() {
     this.usuarios = this.usuarioService.obtenerUsuarios();
+  }
+
+  obtenerUsuario(idUsuario: string) {
+    this.usuarioService.obtenerUsuario(idUsuario).subscribe({
+      next: usuario => {
+        console.log(`Usuario encontrado: `, usuario);
+        // Aquí puedes manejar el usuario encontrado (por ejemplo, mostrar en un modal)
+      },
+      error: err => {
+        console.error(`Error al buscar usuario: ${err}`);
+      }
+    });
   }
 
   borrarUsuario(idUsuario: string | null) {

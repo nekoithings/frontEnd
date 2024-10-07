@@ -36,6 +36,7 @@ export class EditarMascotasComponent implements OnInit {
           console.log(`Error al obtener la mascota: ${err}`);
         }
       });
+      
     } else {
       console.log('La solicitud viene de Nueva Mascota');
     }

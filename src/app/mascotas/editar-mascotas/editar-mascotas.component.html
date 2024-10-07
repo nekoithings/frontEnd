@@ -1,196 +1,222 @@
-<div class="row justify-content-center">
-  <div class="col-lg-6 col-md-8">
-    <form (ngSubmit)="onSubmit()" #mascotaForm="ngForm" class="p-4 bg-light shadow rounded">
-      
-      <!-- Selección visual de ícono (solo visual, no se guarda) -->
-      <fieldset class="form-group mb-4 text-center">
-        <label class="control-label mb-3">Elige un tipo de mascota</label>
-        <div class="icon-selection d-flex justify-content-around">
-          <div class="icon-box" (click)="selectIcon('perro')" [class.selected]="selectedIcon === 'perro'">
-            <!-- Ícono de Perro -->
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="animal-icon">
-              <path d="m22,5h-.382c-.309,0-.586-.171-.724-.447-.479-.958-1.442-1.553-2.512-1.553h-1.382V.77c0-.525-.522-.904-1.015-.726-1.157.416-1.985,1.523-1.985,2.824v1.632l-.964,2.839c-.143.395-.521.66-.94.661l-5.098.003c-1.091,0-2.1.353-2.923.948-.6-.277-2.075-1.141-2.075-2.951,0-.552-.448-1-1-1s-1,.448-1,1c0,2.472,1.596,3.834,2.688,4.476-.437.742-.687,1.606-.687,2.528l.002,8.503c0,1.377,1.122,2.498,2.499,2.498s2.499-1.121,2.499-2.499v-3.506l6-.003v3.504c0,1.378,1.122,2.5,2.5,2.5s2.5-1.122,2.5-2.5v-3.265c0-.4.041-.801.12-1.193l2.06-6.148c2.123-.094,3.82-1.851,3.82-3.996,0-.92-.701-1.898-2-1.898Z"/>
-            </svg>
-            <p>Perro</p>
-          </div>
-          <div class="icon-box" (click)="selectIcon('gato')" [class.selected]="selectedIcon === 'gato'">
-            <!-- Ícono de Gato -->
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="animal-icon">
-              <path d="m23.447.105c-.34-.17-.746-.133-1.047.095l-1.69,1.267c-.677-.299-1.424-.467-2.21-.467s-1.533.169-2.21.467l-1.69-1.267c-.303-.228-.709-.265-1.047-.095-.339.169-.553.516-.553.895v5.5c0,3.033,2.467,5.5,5.5,5.5s5.5-2.467,5.5-5.5V1c0-.379-.214-.725-.553-.895Zm.553,22.894h0c0,.553-.448,1-1,1h-5v-2c0-2.915-2.089-5.351-4.848-5.889-.601-.117-1.152.378-1.152.991v.004c0,.485.353.88.828.981,1.809.383,3.172,1.992,3.172,3.914v2H6.558c-3.224,0-6.558-2.058-6.558-5.5,0-2.135.945-3.659,1.779-5.004.655-1.056,1.221-1.969,1.221-2.996,0-1.135-.277-2.195-2.107-2.445-.504-.069-.893-.482-.893-.99,0-.593.519-1.074,1.107-.997,3.357.44,3.893,2.905,3.893,4.432,0,1.597-.773,2.844-1.521,4.051-.76,1.226-1.479,2.384-1.479,3.949,0,1.791,1.467,2.851,2.997,3.279.007-1.299.364-7.986,6.719-11.077.159-.07.307-.131.456-.193,1.332,2.094,3.667,3.491,6.328,3.491,1.264,0,2.454-.317,3.5-.872v8.872h1c.552,0,1,.448,1,1Z"/>
-            </svg>
-            <p>Gato</p>
-          </div>
-          <div class="icon-box" (click)="selectIcon('hamster')" [class.selected]="selectedIcon === 'hamster'">
-            <!-- Ícono de Hámster -->
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="animal-icon">
-              <path d="m12.5,1.5c0-.828.672-1.5,1.5-1.5s1.5.672,1.5,1.5v.262c.716-.48,1.575-.762,2.5-.762s1.784.282,2.5.762v-.262c0-.828.672-1.5,1.5-1.5s1.5.672,1.5,1.5-.672,1.5-1.5,1.5h-.262c.48.716.762,1.575.762,2.5v.757c.944.708,1.5,1.808,1.5,2.993,0,1.433-.816,2.665-2,3.296v-1.046c0-.552-.448-1-1-1s-1,.448-1,1v1.5h-4v-1.5c0-.552-.448-1-1-1s-1,.448-1,1v1.046c-1.184-.631-2-1.864-2-3.296,0-1.185.556-2.284,1.5-2.993v-.757c0-.925.282-1.784.762-2.5h-.262c-.828,0-1.5-.672-1.5-1.5Zm3.226,13.5c-2.914,0-5.491-2.169-5.71-5.074-.154-2.036.805-3.855,2.328-4.926h-2.925c-3.16,0-6.164,1.678-7.579,4.503-1.019,2.036-1.049,4.151-.422,6.023l-1.288,1.982c-.272.481-.102,1.091.379,1.362h0c.481.272,1.091.102,1.362-.379l.642-.838c.421.587.913,1.126,1.487,1.586v2.26c0,1.381,1.119,2.5,2.5,2.5h0c1.381,0,2.5-1.119,2.5-2.5v-.5h5v.5c0,1.381,1.119,2.5,2.5,2.5h0c1.381,0,2.5-1.119,2.5-2.5v-1.58c1.782-1.034,3.08-2.722,3.659-4.661l.302-.845c-.741.372-1.575.587-2.461.587h-4.774Z"/>
-            </svg>
-            <p>Hámster</p>
-          </div>
-          <div class="icon-box" (click)="selectIcon('loro')" [class.selected]="selectedIcon === 'loro'">
-            <!-- Ícono de Loro -->
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="animal-icon">
-              <path d="m5.659,15s7.112-8.87,7.341-9.309v3.871c0,2.998-2.376,5.438-5.298,5.438h-2.043ZM22,3.524v-.024c.017-1.342-.717-2.628-1.947-3.165-2.57-1.121-5.052.732-5.052,3.165v6.062c0,4.101-3.274,7.438-7.298,7.438h-3.641L.219,21.851c-.345.431-.274,1.061.157,1.405h0c.431.345,1.06.274,1.405-.157l1.643-2.099h5.438l1.224,2.447c.169.339.516.553.895.553h0c.743,0,1.227-.782.895-1.447l-.808-1.615c.855-.093,1.684-.29,2.476-.576l1.543,3.085c.169.339.516.553.895.553h0c.743,0,1.227-.782.895-1.447l-1.52-3.039c3.341-1.949,5.645-5.604,5.645-9.685,0,0,.002-2.795.005-2.828h2.297c.422,0,.762-.38.687-.796-.253-1.398-1.212-2.219-1.99-2.68Z"/>
-            </svg>
-            <p>Loro</p>
-          </div>
-        </div>
-      </fieldset>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Mascotas</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9c74f;
+            color: white;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
 
-      <!-- Otros campos del formulario -->
-<!-- Nombre -->
-<fieldset class="form-group mb-3">
-  <label class="control-label" for="nombre">Nombre</label>
-  <input type="text" class="form-control" required [(ngModel)]="mascota.nombre" name="nombre" placeholder="Introduce el nombre">
-</fieldset>
+        form {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
 
-<!-- Edad -->
-<fieldset class="form-group mb-3">
-  <label class="control-label" for="edad">Edad</label>
-  <input type="number" class="form-control" required [(ngModel)]="mascota.edad" name="edad" placeholder="Introduce la edad">
-</fieldset>
+        form::before {
+            content: '';
+            background-image: url('ruta/a/tu/imagen.png');
+            background-size: cover;
+            background-position: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.3;
+            border-radius: 10px;
+            z-index: 0;
+            pointer-events: none;
+        }
 
-<!-- Raza -->
-<fieldset class="form-group mb-3">
-  <label class="control-label" for="raza">Raza</label>
-  <input type="text" class="form-control" required [(ngModel)]="mascota.raza" name="raza" placeholder="Introduce la raza">
-</fieldset>
+        .form-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #855121;
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-<!-- Género -->
-<fieldset class="form-group mb-3">
-  <label class="control-label" for="genero">Género</label>
-  <select class="form-control" required [(ngModel)]="mascota.genero" name="genero">
-    <option value="" disabled>Seleccione el género</option>
-    <option value="Macho">Macho</option>
-    <option value="Hembra">Hembra</option>
-  </select>
-</fieldset>
+        .icon-container {
+            text-align: center;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-around;
+            gap: 10px;
+        }
 
-<!-- Estado -->
-<fieldset class="form-group mb-3">
-  <label class="control-label" for="estado">Estado</label>
-  <select class="form-control" required [(ngModel)]="mascota.estado" name="estado">
-    <option value="" disabled>Estado de la mascota</option>
-    <option value="Disponible">Disponible</option>
-    <option value="Adoptado">Adoptado</option>
-  </select>
-</fieldset>
+        .icon-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            border: 2px solid transparent;
+            padding: 10px;
+            width: 80px;
+            border-radius: 10px;
+        }
 
-<div class="d-flex justify-content-between text-center">
-  <!-- Botón Enviar -->
-  <button type="submit" class="btn btn-custom" [disabled]="!mascotaForm.form.valid">Enviar</button>
-  <!-- Botón Volver a Inicio -->
-  <button type="button" class="btn btn-inicio" (click)="goHome()">
-    Volver a Inicio
-  </button>
-</div>
-</form>
-</div>
-</div>
+        .icon-box.selected {
+            border-color: #855121;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
 
+        .animal-icon {
+            width: 50px;
+            height: 50px;
+        }
 
-<!-- Estilos personalizados -->
-<!-- Estilos personalizados -->
-<style>
-  body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #3794ac; /* Fondo azul */
-    color: white;
-    margin: 0;
-    min-height: 100vh; /* Ocupa toda la ventana */
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Para que no se centre verticalmente */
-    padding: 20px; /* Añade algo de espacio alrededor en pantallas pequeñas */
-  }
+        label {
+            font-weight: 600;
+            color: #333;
+        }
 
-  form {
-    background-color: #f4f9f8; /* Fondo blanco del formulario */
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 100%; /* Ocupa todo el ancho disponible */
-    width: 100%; /* Responsivo */
-  }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 10px;
+        }
 
-  label {
-    font-weight: 600;
-    color: #333;
-  }
+        .btn-custom {
+            background-color: #f1a93e;
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            flex: 1;
+        }
 
-  .btn-custom {
-    background-color: #3794ac;
-    border: none;
-    color: white;
-    margin-top: 10px;
-    padding: 12px 30px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    width: 48%; /* Ocupa casi la mitad del contenedor */
-  }
+        .btn-custom:hover {
+            background-color: #855121;
+        }
 
-  .btn-custom:hover {
-    background-color: #68b191;
-  }
+        .btn-inicio {
+            background-color: #b1b1b1;
+            color: #ffffff;
+            border: 2px solid #b1b1b1;
+            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            flex: 1;
+        }
 
-  .btn-inicio {
-    background-color: #b1b1b1; 
-    border: none;
-    color: white;
-    margin-top: 10px;
-    padding: 12px 30px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    width: 48%; /* Ocupa casi la mitad del contenedor */
-  }
-
-  .btn-inicio:hover {
-    background-color: #e53935; /* Un tono más oscuro al pasar el ratón */
-  }
-
-  .icon-selection {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap; /* Permite que los iconos se ajusten en pantallas pequeñas */
-    max-width: 100%;
-  }
-
-  .icon-box {
-    text-align: center;
-    flex: 1 1 150px; /* Tamaño flexible para iconos */
-    margin: 10px;
-  }
-
-  .icon-selection .icon-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    border: 2px solid transparent;
-    padding: 10px;
-    width: 100%;
-  }
-
-  .icon-selection .icon-box.selected {
-    border-color: #007bff;
-    background-color: #e7f1ff;
-    border-radius: 10px;
-  }
-  .animal-icon {
-  width: 24px; /* Ajusta este valor según el tamaño original que desees */
-  height: 24px; /* Ajusta este valor según el tamaño original que desees */
+        .btn-inicio:hover {
+            background-color: #855121;
+            color: #fff;
+        }
+        .animal-label {
+  color: #777777; /* Ajusta este color según el tono deseado */
+  font-size: 14px; /* Ajusta el tamaño según tu diseño */
+  text-align: center;
 }
 
-  @media (max-width: 768px) {
-    form {
-      padding: 20px; /* Menos padding en pantallas pequeñas */
-    }
+        @media (max-width: 768px) {
+            form {
+                padding: 20px;
+            }
 
-    .btn-custom, .btn-inicio {
-      width: 100%; /* Botones ocuparán el ancho completo en pantallas pequeñas */
-      margin-bottom: 10px; /* Espacio entre los botones en pantallas pequeñas */
-    }
-  }
-</style>
+            .form-title {
+                font-size: 28px;
+            }
+
+            .button-container {
+                flex-direction: column;
+            }
+
+            .btn-custom, .btn-inicio {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+  <form (ngSubmit)="onSubmit()" #mascotaForm="ngForm">
+    <h1 class="form-title">Registro de Mascota</h1>
+
+    <div class="icon-container">
+      <div class="icon-box" (click)="selectIcon('perro')" [class.selected]="selectedIcon === 'perro'">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="animal-icon" fill="#795548">
+          <path d="m22,5h-.382c-.309,0-.586-.171-.724-.447-.479-.958-1.442-1.553-2.512-1.553h-1.382V.77c0-.525-.522-.904-1.015-.726-1.157.416-1.985,1.523-1.985,2.824v1.632l-.964,2.839c-.143.395-.521.66-.94.661l-5.098.003c-1.091,0-2.1.353-2.923.948-.6-.277-2.075-1.141-2.075-2.951,0-.552-.448-1-1-1s-1,.448-1,1c0,2.472,1.596,3.834,2.688,4.476-.437.742-.687,1.606-.687,2.528l.002,8.503c0,1.377,1.122,2.498,2.499,2.498s2.499-1.121,2.499-2.499v-3.506l6-.003v3.504c0,1.378,1.122,2.5,2.5,2.5s2.5-1.122,2.5-2.5v-3.265c0-.4.041-.801.12-1.193l2.06-6.148c2.123-.094,3.82-1.851,3.82-3.996,0-.92-.701-1.898-2-1.898Z"/>
+        </svg>
+        <p class="animal-label">Perro</p>
+      </div>
+      <div class="icon-box" (click)="selectIcon('gato')" [class.selected]="selectedIcon === 'gato'">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="animal-icon" fill="#9E9E9E">
+          <path d="m23.447.105c-.34-.17-.746-.133-1.047.095l-1.69,1.267c-.677-.299-1.424-.467-2.21-.467s-1.533.169-2.21.467l-1.69-1.267c-.303-.228-.709-.265-1.047-.095-.339.169-.553.516-.553.895v5.5c0,3.033,2.467,5.5,5.5,5.5s5.5-2.467,5.5-5.5V1c0-.379-.214-.725-.553-.895Zm.553,22.894h0c0,.553-.448,1-1,1h-5v-2c0-2.915-2.089-5.351-4.848-5.889-.601-.117-1.152.378-1.152.991v.004c0,.485.353.88.828.981,1.809.383,3.172,1.992,3.172,3.914v2H6.558c-3.224,0-6.558-2.058-6.558-5.5,0-2.135.945-3.659,1.779-5.004.655-1.056,1.221-1.969,1.221-2.996,0-1.135-.277-2.195-2.107-2.445-.504-.069-.893-.482-.893-.99,0-.593.519-1.074,1.107-.997,3.357.44,3.893,2.905,3.893,4.432,0,1.597-.773,2.844-1.521,4.051-.76,1.226-1.479,2.384-1.479,3.949,0,1.791,1.467,2.851,2.997,3.279.007-1.299.364-7.986,6.719-11.077.159-.07.307-.131.456-.193,1.332,2.094,3.667,3.491,6.328,3.491,1.264,0,2.454-.317,3.5-.872v8.872h1c.552,0,1,.448,1,1Z"/>
+        </svg>
+        <p class="animal-label">Gato</p>
+      </div>
+      <div class="icon-box" (click)="selectIcon('hamster')" [class.selected]="selectedIcon === 'hamster'">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="animal-icon" fill="#FFC107">
+          <path d="m12.5,1.5c0-.828.672-1.5,1.5-1.5s1.5.672,1.5,1.5v.262c.716-.48,1.575-.762,2.5-.762s1.784.282,2.5.762v-.262c0-.828.672-1.5,1.5-1.5s1.5.672,1.5,1.5-.672,1.5-1.5,1.5h-.262c.48.716.762,1.575.762,2.5v.757c.944.708,1.5,1.808,1.5,2.993,0,1.433-.816,2.665-2,3.296v-1.046c0-.552-.448-1-1-1s-1,.448-1,1v1.5h-4v-1.5c0-.552-.448-1-1-1s-1,.448-1,1v1.046c-1.184-.631-2-1.864-2-3.296,0-1.185.556-2.284,1.5-2.993v-.757c0-.925.282-1.784.762-2.5h-.262c-.828,0-1.5-.672-1.5-1.5Zm3.226,13.5c-2.914,0-5.491-2.169-5.71-5.074-.154-2.036.805-3.855,2.328-4.926h-2.925c-3.16,0-6.164,1.678-7.579,4.503-1.019,2.036-1.049,4.151-.422,6.023l-1.288,1.982c-.272.481-.102,1.091.379,1.362h0c.481.272,1.091.102,1.362-.379l.642-.838c.421.587.913,1.126,1.487,1.586v2.26c0,1.381,1.119,2.5,2.5,2.5h0c1.381,0,2.5-1.119,2.5-2.5v-.5h5v.5c0,1.381,1.119,2.5,2.5,2.5h0c1.381,0,2.5-1.119,2.5-2.5v-1.58c1.782-1.034,3.08-2.722,3.659-4.661l.302-.845c-.741.372-1.575.587-2.461.587h-4.774Z"/>
+        </svg>
+        <p class="animal-label">Hamster</p>
+      </div>
+      <div class="icon-box" (click)="selectIcon('loro')" [class.selected]="selectedIcon === 'loro'">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="animal-icon" fill="#4CAF50">
+          <path d="m5.659,15s7.112-8.87,7.341-9.309v3.871c0,2.998-2.376,5.438-5.298,5.438h-2.043ZM22,3.524v-.024c.017-1.342-.717-2.628-1.947-3.165-2.57-1.121-5.052.732-5.052,3.165v6.062c0,4.101-3.274,7.438-7.298,7.438h-3.641L.219,21.851c-.345.431-.274,1.061.157,1.405h0c.431.345,1.061.274,1.405-.157l2.033-2.54c.188.024.378.042.57.042h1.299c.996,1.817,2.89,3,5.064,3h3.589c1.532,0,2.89-.63,3.876-1.644l.7-.733c.3-.313.589-.646.874-1l1.715-2.052c.297-.409.193-.992-.217-1.29h0c-.409-.297-.992-.193-1.29.217l-.796,1.031c-.285.367-.591.717-.909,1.048l-.7.732c-.741.774-1.765,1.209-2.846,1.209h-1.619c2.995-1.64,5.3-4.479,6.388-7.834l1.197-3.61c.222-.664-.283-1.357-.984-1.357h-4.5c-.55,0-1-.45-1-1s.45-1,1-1h6.5c.575,0,1.042-.467,1-1.042v-.484c.627-.28,1-1.021,1-1.957Z"/>
+        </svg>
+        <p class="animal-label">Loro</p>
+      </div>S
+    </div>
+
+    <fieldset class="form-group mb-3">
+      <label for="nombre">Nombre</label>
+      <input type="text" class="form-control" required [(ngModel)]="mascota.nombre" name="nombre">
+    </fieldset>
+
+    <fieldset class="form-group mb-3">
+      <label for="edad">Edad</label>
+      <input type="number" class="form-control" required [(ngModel)]="mascota.edad" name="edad">
+    </fieldset>
+
+    <fieldset class="form-group mb-3">
+      <label for="raza">Raza</label>
+      <input type="text" class="form-control" required [(ngModel)]="mascota.raza" name="raza">
+    </fieldset>
+
+    <fieldset class="form-group mb-3">
+      <label for="genero">Género</label>
+      <select class="form-control" required [(ngModel)]="mascota.genero" name="genero">
+        <option value="" disabled selected>Seleccione el género</option>
+        <option value="Macho">Macho</option>
+        <option value="Hembra">Hembra</option>
+      </select>
+    </fieldset>
+
+    <fieldset class="form-group mb-3">
+      <label for="estado">Estado</label>
+      <select class="form-control" required [(ngModel)]="mascota.estado" name="estado">
+        <option value="" disabled selected>Estado de la mascota</option>
+        <option value="Disponible">Disponible</option>
+        <option value="Adoptado">Adoptado</option>
+      </select>
+    </fieldset>
+
+    <div class="button-container">
+      <button type="submit" class="btn-custom" [disabled]="!mascotaForm.form.valid">Enviar</button>
+      <button type="button" class="btn-inicio" (click)="goHome()">Inicio</button>
+    </div>
+  </form>
+</body>
+</html>

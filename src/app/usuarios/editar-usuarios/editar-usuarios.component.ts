@@ -6,11 +6,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-editar-usuarios',
   templateUrl: './editar-usuarios.component.html',
-  styleUrls: ['./editar-usuarios.component.css']  // Asegúrate que esté bien escrito (styleUrls en plural)
+  styleUrls: ['./editar-usuarios.component.css']  
 })
 export class EditarUsuariosComponent implements OnInit {
   idUsuario = '';
-  usuario = new UsuarioModel('', '', '', '', '', '');  // Incluye todos los campos del modelo
+  usuario = new UsuarioModel('', '', '', '', '', '');  
 
   constructor(
     private usuarioService: UsuarioService,
@@ -56,7 +56,7 @@ export class EditarUsuariosComponent implements OnInit {
       });
     } else {
       // Agregar nuevo usuario
-      const nuevoUsuario: Partial<UsuarioModel> = { ...this.usuario, id: undefined };  // Usar Partial<UsuarioModel>
+      const nuevoUsuario: Partial<UsuarioModel> = { ...this.usuario, id: undefined };  
 
       this.usuarioService.agregarUsuario(nuevoUsuario as UsuarioModel).subscribe({
         next: data => {
